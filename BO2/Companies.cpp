@@ -130,6 +130,13 @@ int Companies::clearSold()
 	return (0);
 }
 
+int Companies::clearStarted(int company)
+{
+	started[company] = false;
+	return (started[company]);
+}
+
+
 int Companies::setInitialValuation(int company, int value)
 {
     valuation[company] = value;

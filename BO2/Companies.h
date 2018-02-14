@@ -25,6 +25,8 @@ public:
     int setStarted(int company);
     int setSold(int company);
     int clearSold();
+	int clearStarted(int company);
+
 
     int getorderCompany(int oldTurnorder[]);
     //Precondition: The current turnorders of each companies are stored in turnorder.
