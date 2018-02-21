@@ -5,7 +5,7 @@
 using namespace std;
 
 
-Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies])
+Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies], bool recievershipVal[maxCompanies])
 
 {
 	for (int j = 0; j < maxCompanies; j++)
@@ -19,6 +19,7 @@ Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], 
 		turnorder[j] = turnorderVal[j];
 		started[j] = startedVal[j];
 		sold[j] = soldVal[j];
+		recievership[j] = recievershipVal[j];
 	}
 }
 // Simple Get Routines
@@ -65,11 +66,20 @@ bool Companies::getSold(int company)
 	return (sold[company]);
 }
 
+bool Companies::getRecievership(int company)
+{
+	return (recievership[company]);
+}
+
 bool Companies::getAvailable(int company, int techLevel)
 {
     return ((available[company] <= techLevel));
 }
 
+int Companies::getTurn(int company)
+{
+	return (turnorder[company]);
+}
 
 // Complex Get Routines
 
@@ -117,6 +127,12 @@ int Companies::setStarted(int company)
 	return (started[company]);
 }
 
+int Companies::clearStarted(int company)
+{
+	started[company] = false;
+	return (started[company]);
+}
+
 int Companies::setSold(int company)
 {
 	sold[company] = true;
@@ -130,11 +146,25 @@ int Companies::clearSold()
 	return (0);
 }
 
-int Companies::clearStarted(int company)
+int Companies::clearSold(int company)
 {
-	started[company] = false;
-	return (started[company]);
+	sold[company] = false;
+	return (sold[company]);
 }
+
+int Companies::setRecievership(int company)
+{
+	recievership[company] = true;
+	return (recievership[company]);
+}
+
+int Companies::clearRecievership(int company)
+{
+	for (int j = 0; j< maxCompanies; j++)
+		recievership[j] = false;
+	return (0);
+}
+
 
 
 int Companies::setInitialValuation(int company, int value)
@@ -160,6 +190,13 @@ int Companies::setPresident(int company, int player)
     president[company] = player;
     return(president[company]);
 }
+
+int Companies::setTurn(int company, int turn)
+{
+	turnorder[company] = turn;
+	return (turn);
+}
+
 
 int Companies::setTurnorder(int company, int direction)
 {

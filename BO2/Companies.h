@@ -3,7 +3,7 @@ class Companies
 {
 public:
 	
-	Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies]);
+	Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies], bool recievershipVal[maxCompanies]);
 
 
 	int getCash(int company);
@@ -15,6 +15,8 @@ public:
     bool getStarted(int company);
 	bool getSold(int company);
 	bool getAvailable(int company, int techLevel);
+	bool getRecievership(int company);
+	int getTurn(int company);
 
     int getNext(int order);
     void getInfo(int company);
@@ -24,8 +26,11 @@ public:
     int setPresident(int company, int player);
     int setStarted(int company);
     int setSold(int company);
+	int setRecievership(int company);
     int clearSold();
+	int clearSold(int company);
 	int clearStarted(int company);
+	int clearRecievership(int company);
 
 
     int getorderCompany(int oldTurnorder[]);
@@ -35,6 +40,7 @@ public:
 
     int setInitialValuation(int company, int value);
     int setTurnorder(int company, int direction);
+	int setTurn(int company, int turn);
 
 
 
@@ -46,7 +52,7 @@ public:
 
 	
 
-	const char name[maxCompanies][35] = { "Baltimore & Ohio", "Boston & Maine", "Chesapeake & Ohio", "Illinois Central", "Erie", "New York Central","Nickel Plate", "New York, New Haven & Hartford", "Pennsylvania", "Wabash" };
+	const char name[maxCompanies][35] = { "Baltimore & Ohio", "Boston & Maine", "Chesapeake & Ohio", "Illinois Central", "Erie", "New York Central","Nickel Plate", "New York New Haven & Hartford", "Pennsylvania", "Wabash" };
 	const int available[maxCompanies] = { 1,1,1,3,3,1,3,1,1,3 };
 
 
@@ -62,6 +68,7 @@ private:
 	int started[maxCompanies];
 	int sold[maxCompanies];
 	int turnorder[maxCompanies];
+	int recievership[maxCompanies];
 
 
 };

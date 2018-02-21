@@ -22,12 +22,22 @@ public:
 	int getCompanyTrains(int companyVal);
 	// Precondition: index of company purchasing the train - postive integer
 	// Postcondition: Prints list of trains a company owns
+	int scrapCompanyTrains(int companyVal);
+	// Precondition: index of company purchasing the train - postive integer
+	// Postcondition: Scraps all trains belowing to company
+
 	int getServiceCapacity(int companyVal);
 	// Precondition: index of company purchasing the train - postive integer
 	// Postcondition:  Returns the number of cities that the company can service.
 	int getTechLevel(int currentTechLevel);
 	//Precondition: None
 	//Postcondition: Returns the current tech level based on trains purchased
+	int getTrainOwner(int indexVal);
+	//Precondition: index of train in indexVal
+	//Postcondion: Returns the index of the company owning the train.
+	int setTrainOwner(int indexVal, int player);
+	//Precondition: index of train in indexVal, and index owner of train in 
+	//Postcondion: Returns the index of the company owning the train.
 
 
 
