@@ -26,7 +26,10 @@ int Trains::priceTrainForSale()
 	{
 		k++;
 	}
-	cout << "Train " << k << " is for sale for $" << cost[k] << endl;
+	if (k < maxTrains)
+	{
+		cout << "Train " << k << " is for sale for $" << cost[k] << endl;
+	}
 	return (cost[k]);
 }
 
