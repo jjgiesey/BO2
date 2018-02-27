@@ -22,7 +22,7 @@ Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], 
 		recievership[j] = recievershipVal[j];
 		for (int k = 0; k < maxCities; k++)
 		{
-			cities[j][k] = 0;
+			cities[j][k] = false;
 		}
 	}
 }
@@ -60,7 +60,7 @@ int Companies::getOrphans(int company)
 	return (orphans[company]);
 }
 
-int Companies::getCity(int company, int city)
+bool Companies::getCity(int company, int city)
 {
 	return(cities[company][city]);
 }
@@ -184,7 +184,12 @@ int Companies::setInitialValuation(int company, int value)
 
 int Companies::setCity(int company, int city)
 {
-	cities[company][city] = 1;
+	cities[company][city] = true;
+	return (cities[company][city]);
+}
+int Companies::clearCity(int company, int city)
+{
+	cities[company][city] = false;
 	return (cities[company][city]);
 }
 

@@ -17,7 +17,7 @@ public:
 	bool getAvailable(int company, int techLevel);
 	bool getRecievership(int company);
 	int getTurn(int company);
-	int getCity(int company, int city);
+	bool getCity(int company, int city);
 
     int getNext(int order);
     void getInfo(int company);
@@ -33,6 +33,7 @@ public:
 	int clearSold(int company);
 	int clearStarted(int company);
 	int clearRecievership(int company);
+	int clearCity(int company, int city);
 
 
     int getorderCompany(int oldTurnorder[]);
@@ -67,11 +68,11 @@ private:
 	int shares[maxCompanies];
 	int orphans[maxCompanies];
 	int president[maxCompanies];
-	int started[maxCompanies];
-	int sold[maxCompanies];
+	bool started[maxCompanies];
+	bool sold[maxCompanies];
 	int turnorder[maxCompanies];
-	int recievership[maxCompanies];
-	int cities[maxCompanies][maxCities];
+	bool recievership[maxCompanies];
+	bool cities[maxCompanies][maxCities];
 
 
 };
