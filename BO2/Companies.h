@@ -17,6 +17,7 @@ public:
 	bool getAvailable(int company, int techLevel);
 	bool getRecievership(int company);
 	int getTurn(int company);
+	int getCity(int company, int city);
 
     int getNext(int order);
     void getInfo(int company);
@@ -24,6 +25,7 @@ public:
     int setCash(int company, int cash);
     int setNetprofit(int company, int netprofit);
     int setPresident(int company, int player);
+	int setCity(int company, int city);
     int setStarted(int company);
     int setSold(int company);
 	int setRecievership(int company);
@@ -69,6 +71,7 @@ private:
 	int sold[maxCompanies];
 	int turnorder[maxCompanies];
 	int recievership[maxCompanies];
+	int cities[maxCompanies][maxCities];
 
 
 };

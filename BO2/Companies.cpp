@@ -20,6 +20,10 @@ Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], 
 		started[j] = startedVal[j];
 		sold[j] = soldVal[j];
 		recievership[j] = recievershipVal[j];
+		for (int k = 0; k < maxCities; k++)
+		{
+			cities[j][k] = 0;
+		}
 	}
 }
 // Simple Get Routines
@@ -54,6 +58,11 @@ int Companies::getShares(int company)
 int Companies::getOrphans(int company)
 {
 	return (orphans[company]);
+}
+
+int Companies::getCity(int company, int city)
+{
+	return(cities[company][city]);
 }
 
 bool Companies::getStarted(int company)
@@ -171,6 +180,12 @@ int Companies::setInitialValuation(int company, int value)
 {
     valuation[company] = value;
     return (valuation[company]);
+}
+
+int Companies::setCity(int company, int city)
+{
+	cities[company][city] = 1;
+	return (cities[company][city]);
 }
 
 int Companies::setCash(int company, int value)
