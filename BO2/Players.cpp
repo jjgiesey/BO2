@@ -14,25 +14,37 @@ Players::Players(char nameVal[20], int cashVal, int networthVal, int sharesVal[m
  }
 } */
 
-Players::Players()
+Players::Players(int value)
 {
+	for (int i = 0; i < numberPlayers; i++)
+	{
+		cash[i] = 0;
+		networth[i] = 0;
+		for (int j = 0; j < maxCompanies; j++)
+		{
+			shares[i][j] = 0;
+			sold[i][j] = 0;
+		}
+	}
 
 }
 
-void Players::getInfo()
+void Players::getInfo(int player)
 {
-	cout <<  name << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
+	cout <<  name[player] << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
 
 }
 
-char Players::getName(int player)
-{
-	return (name[player][]);
-}
 int  Players::getCash(int player)
 {
 	return (cash[player]);
 }
+
+int  Players::getNetworth(int player)
+{
+	return (networth[player]);
+}
+
 int  Players::getOrder(int player)
 {
 	return (order[player]);
@@ -48,17 +60,18 @@ int  Players::getSold(int player, int company)
 	return (sold[player][company]);
 }
 
-int  Players::setName(int player, char pname[])
-{
-		strcpy_s(name[player],pname);
-		return (0);
-
-}
 int  Players::setCash(int player, int amount)
 {
 	cash[player] = amount;
 	return(cash[player]);
 }
+
+int  Players::setNetworth(int player, int amount)
+{
+	networth[player] = amount;
+	return(networth[player]);
+}
+
 int  Players::setOrder(int player, int porder)
 {
 	order[player] = porder;

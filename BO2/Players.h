@@ -1,28 +1,22 @@
 #pragma once
-#include "stdafx.h"
-#include "Players.h"
-#include <iostream>
-
-using namespace std;
-
-
 
 class Players
 {
 public:
-	Players();
+	Players(int value);
 
+	char name[maxPlayers][20];
 	void getInfo(int player);
-	char getName(int player);
 	int getCash(int player);
+	int getNetworth(int player);
 	int getOrder(int player);
 	int getShares(int player, int company);
 	int getSold(int player, int company);
 
-	int setName(int player, char name[20]);
 	int setCash(int player, int amount);
+	int setNetworth(int player, int amount);
 	int setOrder(int player, int order);
-	int setShares(int player, int company);
+	int setShares(int player, int company, int amount);
 	int setSold(int player, int company);
 	int clearSold(int player, int company);
 
@@ -33,7 +27,7 @@ public:
 
 private:
 
-char name[maxPlayers][20];
+
 int cash[maxPlayers];
 int networth[maxPlayers];
 int turnorder[maxPlayers];
