@@ -31,7 +31,7 @@ Players::Players(int value)
 
 void Players::getInfo(int player)
 {
-	cout <<  name[player] << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
+//	cout <<  name[player] << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
 
 }
 
@@ -47,7 +47,7 @@ int  Players::getNetworth(int player)
 
 int  Players::getOrder(int player)
 {
-	return (order[player]);
+	return (turnorder[player]);
 }
 
 int  Players::getShares(int player, int company)
@@ -74,7 +74,7 @@ int  Players::setNetworth(int player, int amount)
 
 int  Players::setOrder(int player, int porder)
 {
-	order[player] = porder;
+	turnorder[player] = porder;
 	return(porder);
 }
 int  Players::setShares(int player, int company, int pshares)
