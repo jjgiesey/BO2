@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Companies.h"
-#include <iostream>
+
 
 using namespace std;
 

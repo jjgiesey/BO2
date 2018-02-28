@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Players.h"
 
+using namespace std;
+
 
 /*
 Players::Players(char nameVal[20], int cashVal, int networthVal, int sharesVal[maxCompanies])
@@ -31,7 +33,8 @@ Players::Players(int value)
 
 void Players::getInfo(int player)
 {
-//	cout <<  name[player] << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
+
+	cout <<  name[player] << " has $" << cash[player] << " and a networth of $" << networth[player] << " and a turn order of " << turnorder[player] << endl;
 
 }
 
