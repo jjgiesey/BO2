@@ -16,7 +16,7 @@ Players::Players(char nameVal[20], int cashVal, int networthVal, int sharesVal[m
 
 Players::Players(int value)
 {
-	for (int i = 0; i < numberPlayers; i++)
+	for (int i = 0; i < maxPlayers; i++)
 	{
 		cash[i] = 0;
 		networth[i] = 0;
