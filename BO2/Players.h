@@ -1,35 +1,38 @@
 #pragma once
-#include "stdafx.h"
-#include "Players.h"
-#include <iostream>
-
-using namespace std;
-
-
 
 class Players
 {
 public:
-//	Players(char nameVal[20], int cashVal, int networthVal, int sharesVal[maxCompanies]);
-	Players();
+	Players(int value);
 
-	void getInfo();
- 
+	char name[maxPlayers][20];
+	void getInfo(int player);
+	int getCash(int player);
+	int getNetworth(int player);
+	int getOrder(int player);
+	int getShares(int player, int company);
+	int getSold(int player, int company);
+
+	int setCash(int player, int amount);
+	int setNetworth(int player, int amount);
+	int setOrder(int player, int order);
+	int setShares(int player, int company, int amount);
+	int setSold(int player, int company);
+	int clearSold(int player, int company);
+
+	int changeCash(int player, int amount);
+	int changeShares(int player, int company, int amount);
 
 
-
-
-char name[20];
-int cash;
-int networth;
-int turnorder;
-int shares[maxCompanies];
-int sold[maxCompanies];
 
 private:
 
 
-
+int cash[maxPlayers];
+int networth[maxPlayers];
+int turnorder[maxPlayers];
+int shares[maxPlayers][maxCompanies];
+int sold[maxPlayers][maxCompanies];
 
 };
 
