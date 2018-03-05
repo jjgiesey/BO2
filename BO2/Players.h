@@ -18,11 +18,24 @@ public:
 	int setNetworth(int player, int amount);
 	int setOrder(int player, int order);
 	int setShares(int player, int company, int amount);
+	int totalSharesOwned(int company);
+
 	int setSold(int player, int company);
 	int clearSold(int player, int company);
 
 	int changeCash(int player, int amount);
 	int changeShares(int player, int company, int amount);
+	int getTurnorders(int playerTurnorder[], int numberPlayers);
+	// Preconditions: Current turn order is passed to function with number of player.
+	// Postcondition: The function will use the current player cash to re-evaluated turn order so that 
+	//				  the index of the lowest cash in playerTurnorder[0] and highest cash is in playerTurnorder[numberPlayers].
+	//				Returns 0 if successful.
+	int setTurnorders();
+	// Preconditions: Call function when cash changed.
+	// Postcondition: Function will revevaluate the turn order so that the lowest cash in hase order =0 and 
+	//				the highest cash player has order = numberPlayers. Should be called when cash changes.
+	//				Returns 0 if successful.
+
 
 
 
@@ -31,7 +44,7 @@ private:
 
 int cash[maxPlayers];
 int networth[maxPlayers];
-int turnorder[maxPlayers];
+int order[maxPlayers];
 int shares[maxPlayers][maxCompanies];
 int sold[maxPlayers][maxCompanies];
 

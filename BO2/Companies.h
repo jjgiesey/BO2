@@ -5,55 +5,63 @@ class Companies
 {
 public:
 	
-	Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies], bool recievershipVal[maxCompanies]);
+	Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int orderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies], bool recievershipVal[maxCompanies]);
 
 
 	int getCash(int company);
+    int setCash(int company, int cash);
+	int changeCash(int company, int value);
+
 	int getPresident(int company);
-	int getValuation(int company);
+    int setPresident(int company, int player);
+
 	int getNetprofit(int company);
+    int setNetprofit(int company, int netprofit);
+
 	int getShares(int company);
+	int setShares(int company, int value);
+    int changeShares(int company, int sharesVal);
+
 	int getOrphans(int company);
+	int setOrphans(int company, int value);
+    int changeOrphans(int company, int sharesVal);
+
     bool getStarted(int company);
-	bool getSold(int company);
-	bool getAvailable(int company, int techLevel);
+    int setStarted(int company);
+	int clearStarted(int company);
+
 	bool getRecievership(int company);
-	int getTurn(int company);
+	int setRecievership(int company);
+	int clearRecievership(int company);
+	
 	bool getCity(int company, int city);
+	int setCity(int company, int city);
+	int clearCity(int company, int city);
 
     int getNext(int order);
     void getInfo(int company);
 
-    int setCash(int company, int cash);
-    int setNetprofit(int company, int netprofit);
-    int setPresident(int company, int player);
-	int setCity(int company, int city);
-    int setStarted(int company);
+	bool getSold(int company);
     int setSold(int company);
-	int setRecievership(int company);
     int clearSold();
 	int clearSold(int company);
-	int clearStarted(int company);
-	int clearRecievership(int company);
-	int clearCity(int company, int city);
 
+	int getValuation(int company);
+    int setValuation(int company, int value);
+    int increaseValuation(int company);
+	int decreaseValuation(int company);
 
+	bool getAvailable(int company, int techLevel);
+
+	int getOrder(int company);
+	int setOrder(int company, int turn);
+	int getTurnorders(int companyTurnorder[]);
+	int setTurnorders();
     int getorderCompany(int oldTurnorder[]);
     //Precondition: The current turnorders of each companies are stored in turnorder.
     //Postcondition: This values are stored in oldTurnorder with the first company index
     // in 0, the second in 1, ...
-
-    int setInitialValuation(int company, int value);
     int setTurnorder(int company, int direction);
-	int setTurn(int company, int turn);
-
-
-
-    int increaseValuation(int company);
-	int decreaseValuation(int company);
-    int changeShares(int company, int sharesVal);
-    int changeOrphans(int company, int sharesVal);
-	int changeCash(int company, int value);
 
 	
 
@@ -72,7 +80,7 @@ private:
 	int president[maxCompanies];
 	bool started[maxCompanies];
 	bool sold[maxCompanies];
-	int turnorder[maxCompanies];
+	int order[maxCompanies];
 	bool recievership[maxCompanies];
 	bool cities[maxCompanies][maxCities];
 
