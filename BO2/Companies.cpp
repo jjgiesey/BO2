@@ -1,31 +1,39 @@
 #include "stdafx.h"
 #include "Companies.h"
+#include "Trains.h"
 
 
 using namespace std;
 
+Trains trainsC(0);
 
-Companies::Companies(int cashVal[maxCompanies], int netprofitVal[maxCompanies], int valuationVal[maxCompanies], int sharesVal[maxCompanies], int orphansVal[maxCompanies], int presidentVal[maxCompanies], int turnorderVal[maxCompanies], bool startedVal[maxCompanies], bool soldVal[maxCompanies], bool recievershipVal[maxCompanies])
+Companies::Companies(int setup)
 
 {
 	for (int j = 0; j < maxCompanies; j++)
 	{
-		cash[j] = cashVal[j];
-		netprofit[j] = netprofitVal[j];
-		valuation[j] = valuationVal[j];
-		shares[j] = sharesVal[j];
-		orphans[j] = orphansVal[j];
-		president[j] = presidentVal[j];
-		order[j] = turnorderVal[j];
-		started[j] = startedVal[j];
-		sold[j] = soldVal[j];
-		recievership[j] = recievershipVal[j];
+		cash[j] = 0;
+		netprofit[j] = 0;
+		valuation[j] = 0;
+		shares[j] = 10;
+		orphans[j] = 0;
+		president[j] = maxPlayers;
+		order[j] = j;
+		started[j] = false;
+		recievership[j] = false;
 		for (int k = 0; k < maxCities; k++)
 		{
 			cities[j][k] = false;
 		}
+		for (int k = 0; k < maxCities; k++)
+		{
+			trains[j][k] = 0;
+		}
 	}
 }
+
+
+
 // Simple Get Routines
 
 //Cash functions
@@ -226,62 +234,157 @@ int Companies::setTurnorders()
 	}
 	return(0);
 }
-/*
-int Companies::getorderCompany(int oldTurnorder[])
-{
- for (int j=0; j< maxCompanies; j++)
- {
-    oldTurnorder[turnorder[j]]=j; 
- }
- return 0;
-}
-int Companies::getTurn(int company)
-{
-	return (order[company]);
-}
-int Companies::getNext(int order)
-{
-	int next = maxCompanies;
-	for (int j = 0; j < maxCompanies; j++)
-	{
-		if (order == order[j])
-		{
-			next = j;
-		}
-	}
-	return (next);
-}
-int Companies::setTurnorders(int company, int direction)
-{
-	int turnorderChange = 0;
 
-	if (direction < 0) // Valuation decrement
+
+//Train routines
+
+
+int Companies::getTrainForSale()
+{
+	int train =0;
+	for (int k=0; k<maxTrains; k++)	// Go through trains starting with lowest
 	{
 		for (int j = 0; j < maxCompanies; j++)
 		{
-			if ((turnorder[company] < turnorder[j]) && (valuation[company] < valuation[j]))
-			{
-				turnorder[j] --; // bump up j one
-				turnorderChange++; // bumn down company one
-			}
+			if (trains[j][k]!=0) // If train owned or scrapped
+			train = k+1;      // Indicate next highest train couold be for sale
 		}
-		turnorder[company] += turnorderChange;
+	}
+	return (train); //Return highest train not owned
+}
+
+int Companies::buyTrainForSale(int company, int techLevel)
+{
+	int train = getTrainForSale();
+	trains[company][train] = 1;
+	techLevel = getTechLevel(techLevel);
+	return (trainsC.cost[train]); //Return cost of highest train not owned
+}
+
+int Companies::getCompanyTrains(int company)
+{
+	int numberTrains = 0;
+	for (int k = 0; k < 30; k++)
+	{
+		if (trains[company][k]==1)
+		{
+			cout << trainsC.number[k] << ": Train " << trainsC.number[k] << " with scrap value $" << trainsC.scrap[k] << endl;
+			numberTrains++;
+		}
+	}
+	return (numberTrains);
+}
+int Companies::scrapTrainOfCompany(int train, int company)
+{
+	if ((train<0) || (train>=30))
+	{
+		cout << "The company does not own the train to scrap \n";
+		cin.clear();
+		cin.ignore(10, '\n');
+		return (0);
+	}
+	else if (trains[company][train] != 1)
+	{
+		cout << "The company does not own the train to scrap \n";
+		return (0);
 	}
 	else
 	{
-		for (int j = 0; j < maxCompanies; j++)
-		{
-			if ((turnorder[company] > turnorder[j]) && (valuation[company] > valuation[j]))
-			{
-				turnorder[j] ++; // bump down j one
-				turnorderChange--; // bumn up company one
-			}
-		}
-		turnorder[company] += turnorderChange;
+		trains[company][train]= -1;
+		cout << "Train " << train+1 << " has been scrapped for for $" << trainsC.scrap[train] << endl;
+		return (trainsC.scrap[train]);
 	}
-	return(turnorder[company]);
 }
+
+int Companies::getServiceCapacity(int company)
+{
+	int capacity = 0;
+	for (int k = 0; k < 30; k++)
+	{
+		if (trains[company][k]==1)
+		{
+			capacity = capacity + trainsC.level[k];
+		}
+	}
+	return(capacity);
+}
+
+int Companies::scrapCompanyTrains(int company)
+{
+	int numberTrains = 0;
+	for (int k = 0; k < 30; k++)
+	{
+		if (trains[company][k] == 1)
+		{
+			trains[company][k] = -1;
+			numberTrains++;
+		}
+	}
+	return (numberTrains);
+}
+int Companies::getTechLevel(int currentTechLevel)
+{
+	int train = getTrainForSale();
+	if (trainsC.level[train-1] != currentTechLevel)
+		cout << "NEW TECH LEVEL IS " << trainsC.level[train-1] << endl;
+	return trainsC.level[train - 1];
+}
+
+int Companies::getTrains(int company, int train)
+{
+	return(trains[company][train]);
+}
+
+int Companies::setTrains(int company, int train, int value)
+{
+	trains[company][train] = value;
+	return(0);
+}
+
+
+/*
+
+ForSale(int companyVal)
+{
+int k = 0;
+while ((owner[k] != -1) && (k < maxTrains))
+{
+k++;
+}
+else
+{
+cout << "Company bought train " << k << " for $" << cost[k] << endl;
+owner[k] = companyVal;
+return (cost[k]);
+}
+}
+
+
+int Companies::priceTrainForSale()
+{
+int k = 0;
+while ((owner[k] != -1) && (k < maxTrains))
+{
+k++;
+}
+if (k < maxTrains)
+{
+cout << "Train " << k << " is for sale for $" << cost[k] << endl;
+}
+return (cost[k]);
+}
+
+int Companies::buyTrain
+int Companies::getCost(int indexVal)
+{
+return (cost[indexVal - 1]);
+}
+
+
 */
+
+
+
 // Complex Get Routines
 bool Companies::getAvailable(int company, int techLevel)
 {
