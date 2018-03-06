@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Players.h"
 
+using namespace std;
+
 
 /*
 Players::Players(char nameVal[20], int cashVal, int networthVal, int sharesVal[maxCompanies])
@@ -18,8 +20,9 @@ Players::Players(int value)
 {
 	for (int i = 0; i < maxPlayers; i++)
 	{
-		cash[i] = 0;
+		cash[i] = 1000000;
 		networth[i] = 0;
+		order[i] = i;
 		for (int j = 0; j < maxCompanies; j++)
 		{
 			shares[i][j] = 0;
@@ -29,58 +32,53 @@ Players::Players(int value)
 
 }
 
-void Players::getInfo(int player)
-{
-//	cout <<  name[player] << " has $" << cash << " and a networth of $" << networth << " and a turn order of " << turnorder << endl;
-
-}
-
+// Cash functions
 int  Players::getCash(int player)
 {
 	return (cash[player]);
 }
-
-int  Players::getNetworth(int player)
-{
-	return (networth[player]);
-}
-
-int  Players::getOrder(int player)
-{
-	return (turnorder[player]);
-}
-
-int  Players::getShares(int player, int company)
-{
-	return (shares[player][company]);
-}
-
-int  Players::getSold(int player, int company)
-{
-	return (sold[player][company]);
-}
-
 int  Players::setCash(int player, int amount)
 {
 	cash[player] = amount;
+	setTurnorders();
+	return(cash[player]);
+}
+int  Players::changeCash(int player, int amount)
+{
+	cash[player] += amount;
+	setTurnorders();
 	return(cash[player]);
 }
 
-int  Players::setNetworth(int player, int amount)
+//Shares Routines
+int  Players::getShares(int player, int company)
 {
-	networth[player] = amount;
-	return(networth[player]);
-}
-
-int  Players::setOrder(int player, int porder)
-{
-	turnorder[player] = porder;
-	return(porder);
+	return (shares[player][company]);
 }
 int  Players::setShares(int player, int company, int pshares)
 {
 	shares[player][company] = pshares;
 	return(pshares);
+}
+int  Players::changeShares(int player, int company, int amount)
+{
+	shares[player][company] += amount;
+	return(shares[player][company]);
+}
+int  Players::totalSharesOwned(int company)
+{
+	int sum = 0;
+	for (int i = 0; i < maxPlayers; i++)
+	{
+		sum += shares[i][company];
+	}
+	return(sum);
+}
+
+//Sold functions
+int  Players::getSold(int player, int company)
+{
+	return (sold[player][company]);
 }
 int  Players::setSold(int player, int company)
 {
@@ -93,13 +91,75 @@ int  Players::clearSold(int player, int company)
 	return(0);
 }
 
-int  Players::changeCash(int player, int amount)
+//Order functions
+int  Players::getOrder(int player)
 {
-	cash[player] += amount;
-	return(cash[player]);
+	return (order[player]);
 }
-int  Players::changeShares(int player, int company, int amount)
+int  Players::setOrder(int player, int porder)
 {
-	shares[player][company] += amount;
-	return(shares[player][company]);
+	order[player] = porder;
+	return(porder);
 }
+int Players::getTurnorders(int playerTurnorder[], int numberPlayers)
+{
+	// Determine  player turn order		
+	// Sort players in order of cash
+	for (int i = 0; i < maxPlayers; i++)
+	{
+		playerTurnorder[order[i]] = i; //Place local order in turnorder
+	}
+
+	return(0);
+}
+int Players::setTurnorders()
+{
+	// Determine  player turn order		
+// do not change external turn order array
+	int temp;
+	int Turnorder[maxPlayers];
+	for (int i = 0; i < maxPlayers; i++)
+	{
+		Turnorder[order[i]] = i; //Place local order in turnorder
+	}
+	for (int i = 0; i < maxPlayers - 1; i++)
+	{
+		for (int j = 0; j < maxPlayers - i - 1; j++)
+		{
+			if (cash[Turnorder[j]] > cash[Turnorder[j + 1]])
+			{
+				temp = Turnorder[j];
+				Turnorder[j] = Turnorder[j + 1];
+				Turnorder[j + 1] = temp;
+			}
+		}
+	}
+	//Store new turn order in local turn order
+	for (int i = 0; i < maxPlayers; i++)
+	{
+		order[Turnorder[i]] = i;
+	}
+	return(0);
+}
+
+//Networth functions
+int  Players::getNetworth(int player)
+{
+	return (networth[player]);
+}
+int  Players::setNetworth(int player, int amount)
+{
+	networth[player] = amount;
+	return(networth[player]);
+}
+
+
+//Other functions
+
+void Players::getInfo(int player)
+{
+
+	cout <<  name[player] << " has $" << cash[player] << " and a networth of $" << networth[player] << " and a turn order of " << order[player] << endl;
+
+}
+

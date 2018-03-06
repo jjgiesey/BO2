@@ -4,6 +4,6 @@
 
 TechLevels::TechLevels()
 {
-	int z = lowVal[0];
+	int z = 3;
 }
 
