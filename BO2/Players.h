@@ -6,7 +6,7 @@ class Players
 public:
 	Players(int value);
 
-	wchar_t name[maxPlayers][20];
+	char name[maxPlayers][20];
 	void getInfo(int player);
 	int getCash(int player);
 	int getNetworth(int player);
