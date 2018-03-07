@@ -258,6 +258,7 @@ int Companies::buyTrainForSale(int company, int techLevel)
 	int train = getTrainForSale();
 	trains[company][train] = 1;
 	techLevel = getTechLevel(techLevel);
+	cout << "**Train " << train + 1 << " has been purchased for $" << trainsC.cost[train] << endl;
 	return (trainsC.cost[train]); //Return cost of highest train not owned
 }
 
@@ -291,7 +292,7 @@ int Companies::scrapTrainOfCompany(int train, int company)
 	else
 	{
 		trains[company][train]= -1;
-		cout << "Train " << train+1 << " has been scrapped for for $" << trainsC.scrap[train] << endl;
+		cout << "**Train " << train+1 << " has been scrapped for for $" << trainsC.scrap[train] << endl;
 		return (trainsC.scrap[train]);
 	}
 }
