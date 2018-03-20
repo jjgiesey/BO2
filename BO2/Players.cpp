@@ -159,7 +159,7 @@ int  Players::setNetworth(int player, int amount)
 void Players::getInfo(int player)
 {
 
-	cout <<  name[player] << " has $" << cash[player] << " and a networth of $" << networth[player] << " and a turn order of " << order[player] << endl;
+	cout << "+" << name[player] << " has $" << cash[player] << " and a networth of $" << networth[player] << " and a turn order of " << order[player] << endl;
 
 }
 

@@ -87,7 +87,7 @@ public:
 	int setTrains(int company, int train, int value);
 	//Precondition: index of train in indexVal, and index owner of train in 
 	//Postcondion: Returns the index of the company owning the train.
-	int buyTrainForSale(int company, int techLevel);
+	int buyTrainForSale(int company, int & techLevel);
 	int getTechLevel(int currentTechLevel);
 
 	const char name[maxCompanies][35] = { "Baltimore & Ohio", "Boston & Maine", "Chesapeake & Ohio", "Illinois Central", "Erie", "New York Central","Nickel Plate", "New York New Haven & Hartford", "Pennsylvania", "Wabash" };
